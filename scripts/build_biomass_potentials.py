@@ -31,7 +31,7 @@ def build_nuts_population_data(year=2013):
     pop = pd.DataFrame(pop.append(swiss), columns=["total"])
     
     # add missing manually
-    pop["AL"] = 2893
+    # pop["AL"] = 2893
     pop["BA"] = 3871
     pop["RS"] = 7210
     
@@ -144,7 +144,7 @@ def build_nuts2_shapes():
     nuts2 = gpd.GeoDataFrame(gpd.read_file(snakemake.input.nuts2).set_index('id').geometry)
 
     countries = gpd.read_file(snakemake.input.country_shapes).set_index('name')
-    missing = countries.loc[["AL", "RS", "BA"]]
+    missing = countries.loc[["RS", "BA"]]
     nuts2.rename(index={"ME00": "ME", "MK00": "MK"}, inplace=True)
 
     return nuts2.append(missing)

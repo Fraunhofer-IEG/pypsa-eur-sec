@@ -46,3 +46,4 @@ config.yaml
 doc/_build
 
 *.xls
+data/pypsa-eur-sec-data-bundle.tar.gz
