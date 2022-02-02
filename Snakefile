@@ -453,6 +453,14 @@ rule plot_summary:
     benchmark: SDIR + "/benchmarks/plot_summary"
     script: "scripts/plot_summary.py"
 
+rule prepare_db:
+    input: 
+        network = RDIR + "/postnetworks/elec_s{simpl}_{clusters}_lv{lv}_{opts}_{sector_opts}_{planning_horizons}.nc"
+    output: 
+        db = RDIR + "/database/elec_s{simpl}_{clusters}_lv{lv}_{opts}_{sector_opts}_{planning_horizons}.csv",
+        yr_agg = RDIR + "/database/elec_s{simpl}_{clusters}_lv{lv}_{opts}_{sector_opts}_{planning_horizons}_agg.csv"
+    script: "scripts/prepare_db.py"
+
 
 if config["foresight"] == "overnight":
 
@@ -542,3 +550,5 @@ if config["foresight"] == "myopic":
         resources: mem_mb=config['solving']['mem']
         benchmark: RDIR + "/benchmarks/solve_network/elec_s{simpl}_{clusters}_lv{lv}_{opts}_{sector_opts}_{planning_horizons}"
         script: "scripts/solve_network.py"
+
+
